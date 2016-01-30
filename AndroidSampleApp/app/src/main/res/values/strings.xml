@@ -9,7 +9,7 @@
     <string name="cd_search_icon">search image</string>
     <string name="no_data_found">No Image Found.</string>
     <string name="error_while_downloading_images">Error has occurred while downloading images.</string>
-    <string name="search_hint_text">Enter text to search images</string>
+    <string name="search_hint_text">Search Images...</string>
     <string name="app_welcome_text">Android Image Search application implements an "Image Search" experience for English
         Wikipedia.\n Please type a search term into an edit box. As you type, you can view the images whose titles starts
         with the entered text.
