@@ -1,0 +1,16 @@
+<resources>
+    <dimen name="width_2dp">2dp</dimen>
+    <dimen name="width_5dp">5dp</dimen>
+    <dimen name="width_10dp">10dp</dimen>
+    <dimen name="width_20dp">20dp</dimen>
+    <dimen name="width_40dp">40dp</dimen>
+    <dimen name="image_height">150dp</dimen>
+    <dimen name="card_height">200dp</dimen>
+    <dimen name="search_box_height">30dp</dimen>
+
+    <dimen name="tv_size_20sp">20sp</dimen>
+    <dimen name="tv_size_16sp">16sp</dimen>
+    <dimen name="width_4dp">4dp</dimen>
+
+
+</resources>

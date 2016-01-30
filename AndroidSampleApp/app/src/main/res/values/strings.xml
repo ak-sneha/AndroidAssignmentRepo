@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AndroidSampleApp</string>
+
+    <string name="header_text">Android Image Search</string>
+    <string name="no_network_connectivity">Error! No Network Connectivity.</string>
+    <string name="no_network_error">Error! Network Error</string>
+    <string name="test_data_text">Test Data for Assignment</string>
+    <string name="ok_text">OK</string>
+    <string name="cd_search_icon">search image</string>
+    <string name="no_data_found">No Image Found.</string>
+    <string name="error_while_downloading_images">Error has occurred while downloading images.</string>
+    <string name="search_hint_text">Enter text to search images</string>
+    <string name="app_welcome_text">Android Image Search application implements an "Image Search" experience for English
+        Wikipedia.\n Please type a search term into an edit box. As you type, you can view the images whose titles starts
+        with the entered text.
+    </string>
+</resources>

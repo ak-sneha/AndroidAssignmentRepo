@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/nav_item_inbox"
+        android:icon="@drawable/inbox"
+        android:title="Test 1" />
+
+    <item
+        android:id="@+id/nav_item_sent"
+        android:icon="@drawable/sent"
+        android:title="Test 2" />
+
+    <item
+        android:id="@+id/nav_item_draft"
+        android:icon="@drawable/draft"
+        android:title="Test 3" />
+
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:icon="@drawable/spam"
+                android:title="Test 4" />
+            <item
+                android:icon="@drawable/bin"
+                android:title="Test 5" />
+        </menu>
+    </item>
+
+    <group android:id="@+id/group_settings_id">
+
+        <item
+            android:icon="@drawable/settings"
+            android:title="Test 6" />
+        <item
+            android:icon="@drawable/help"
+            android:title="Test 7" />
+    </group>
+
+
+</menu>
