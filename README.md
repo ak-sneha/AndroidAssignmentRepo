@@ -1,2 +1,2 @@
 # AndroidAssignmentRepo
-This is Android Image Search assignment repository.
+As per requirement I have created the list and attached the screen-shot
