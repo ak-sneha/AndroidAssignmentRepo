@@ -39,12 +39,11 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/listview_search_result"
-        android:layout_width="fill_parent"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_search_box"
-        android:divider="@null" />
+        android:layout_below="@id/layout_search_box"/>
 
     <ProgressBar
         android:id="@+id/loading_view"
