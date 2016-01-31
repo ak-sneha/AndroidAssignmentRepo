@@ -113,21 +113,28 @@ public class WebServiceCaller implements IWebServiceCaller {
         public String doInBackground(String... params) {
             String response;
             response = postJSONData(url, postData);
-            mWebServiceCallBackListener.onWebServiceStatus(response != null);
+            if(mWebServiceCallBackListener != null) {
+                mWebServiceCallBackListener.onWebServiceStatus(response != null);
+            }
             return response;
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            mWebServiceCallBackListener.onWebServiceProgress(values[0]);
+            if(mWebServiceCallBackListener != null) {
+                mWebServiceCallBackListener.onWebServiceProgress(values[0]);
+            }
+
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             mResponse = result;
-            mWebServiceCallBackListener.onWebServiceCompleted(result);
+            if (mWebServiceCallBackListener != null) {
+                mWebServiceCallBackListener.onWebServiceCompleted(result);
+            }
         }
 
 
