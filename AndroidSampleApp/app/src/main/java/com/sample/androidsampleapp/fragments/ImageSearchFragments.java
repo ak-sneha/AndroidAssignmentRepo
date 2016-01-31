@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -41,6 +43,9 @@ import java.util.TimerTask;
  */
 public class ImageSearchFragments extends Fragment implements TextWatcher, IWebServiceCallBackListener {
 
+    protected RecyclerView.LayoutManager mLayoutManager;
+
+    private static final int SPAN_COUNT = 2;
     /**
      * Constant indicating message to show progress bar.
      */
@@ -68,7 +73,7 @@ public class ImageSearchFragments extends Fragment implements TextWatcher, IWebS
     /**
      * Holds reference of {@link ListView} used to show the search result.
      */
-    private ListView mSearchListView;
+    private RecyclerView mRecyclerView;
     /**
      * Holds reference of an interface to Web Service Call.
      */
@@ -117,7 +122,7 @@ public class ImageSearchFragments extends Fragment implements TextWatcher, IWebS
         mResources = getActivity().getResources();
 
         mSearchEditText = (EditText) view.findViewById(R.id.et_search);
-        mSearchListView = (ListView) view.findViewById(R.id.listview_search_result);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mProgressBar = view.findViewById(R.id.loading_view);
         mWelcomeText = (TextView) view.findViewById(R.id.tv_welcome_text);
 
@@ -126,7 +131,14 @@ public class ImageSearchFragments extends Fragment implements TextWatcher, IWebS
         setListenersToView();
 
         mSearchListAdapter = new SearchListAdapter(getActivity(), imageInfoModelList);
-        mSearchListView.setAdapter(mSearchListAdapter);
+
+        // Set SearchListAdapter as the adapter for RecyclerView.
+        mRecyclerView.setAdapter(mSearchListAdapter);
+
+        mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.scrollToPosition(0);
+
         mWelcomeText.setVisibility(View.VISIBLE);
 
         hideKeyboard();
@@ -236,7 +248,6 @@ public class ImageSearchFragments extends Fragment implements TextWatcher, IWebS
             if (!mSearchEditText.getText().toString().isEmpty()) {
                 mSearchListAdapter.updateListData(imageInfoModelList);
                 mSearchListAdapter.notifyDataSetChanged();
-                mSearchListView.invalidate();
             } else {
                 mWelcomeText.setVisibility(View.VISIBLE);
                 imageInfoModelList.clear();

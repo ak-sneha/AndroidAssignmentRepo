@@ -1,11 +1,10 @@
 package com.sample.androidsampleapp.adapters;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,15 +18,11 @@ import java.util.List;
 /**
  * Adapter to set list of items in List-view.
  */
-public class SearchListAdapter extends BaseAdapter {
+public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
     /**
      * Holds the data list of ImageInfoModel to show in the ListView.
      */
     private List<ImageInfoModel> mListItems;
-    /**
-     * Holds the instance of LayoutInflater, responsible to inflate the list item layout.
-     */
-    private LayoutInflater mInflater;
 
     /**
      * Constructor.
@@ -37,7 +32,6 @@ public class SearchListAdapter extends BaseAdapter {
      */
     public SearchListAdapter(Context context, ArrayList<ImageInfoModel> items) {
         this.mListItems = items;
-        mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
     }
 
     /**
@@ -50,51 +44,45 @@ public class SearchListAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return mListItems.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return mListItems.get(position);
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        // Create a new view.
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.list_item_card_view, viewGroup, false);
+
+        return new ViewHolder(v);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        ImageInfoModel rowItem = (ImageInfoModel) getItem(position);
-
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_item_card_view, null);
-            holder = new ViewHolder();
-            holder.txtTitle = (TextView) convertView.findViewById(R.id.tv_image_title);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.icon);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-
-        holder.txtTitle.setText(rowItem.getTitle());
-
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        // Get element from your dataset at this position and replace the contents of the view
+        // with that element
+        ImageInfoModel rowItem = mListItems.get(position);
+        viewHolder.txtTitle.setText(rowItem.getTitle());
         String sourceUrl = rowItem.getBitmapUrl();
         if (sourceUrl != null && !sourceUrl.isEmpty()) {
-            AppController.getInstance().getImageLoader().displayImage(rowItem.getBitmapUrl(), holder.imageView);
+            AppController.getInstance().getImageLoader().displayImage(rowItem.getBitmapUrl(), viewHolder.imageView);
         } else {
-            holder.imageView.setImageResource(R.drawable.abc_ab_share_pack_mtrl_alpha);
+            viewHolder.imageView.setImageResource(R.drawable.abc_ab_share_pack_mtrl_alpha);
         }
-        return convertView;
     }
 
     /**
-     * A ViewHolder to optimize the  performance of ListView.
+     * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
-    private static class ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView txtTitle;
+
+        public ViewHolder(View v) {
+            super(v);
+            txtTitle = (TextView) v.findViewById(R.id.tv_image_title);
+            imageView = (ImageView) v.findViewById(R.id.icon);
+        }
     }
+
 }
